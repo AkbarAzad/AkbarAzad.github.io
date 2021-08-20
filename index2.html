@@ -6,8 +6,9 @@
 -->
 <html>
 	<head>
-		<title>Strata by HTML5 UP</title>
+		<title>Akbar's Portfolio</title>
 		<meta charset="utf-8" />
+		<meta property="og:image" content="images/selfie.jpg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
@@ -16,10 +17,10 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<a href="#" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
-					<h1><strong>I am Strata</strong>, a super simple<br />
-					responsive site template freebie<br />
-					crafted by <a href="http://html5up.net">HTML5 UP</a>.</h1>
+					<a href="#" class="image avatar"><img id="image" src="images/selfie.jpg" max_width=100% max_height=100%/></a>
+					<h1><strong>Akbar's Portfolio</strong>, showcasing projects in 
+						Python, R, SQL and Tableau.<br />
+					<a href="https://www.linkedin.com/in/akbarazad/"><strong>@AkbarAzad</strong></a></h1>
 				</div>
 			</header>
 
@@ -29,93 +30,139 @@
 				<!-- One -->
 					<section id="one">
 						<header class="major">
-							<h2>Ipsum lorem dolor aliquam ante commodo<br />
-							magna sed accumsan arcu neque.</h2>
+							<h2>Simulating data using Python</h2>
+							
 						</header>
-						<p>Accumsan orci faucibus id eu lorem semper. Eu ac iaculis ac nunc nisi lorem vulputate lorem neque cubilia ac in adipiscing in curae lobortis tortor primis integer massa adipiscing id nisi accumsan pellentesque commodo blandit enim arcu non at amet id arcu magna. Accumsan orci faucibus id eu lorem semper nunc nisi lorem vulputate lorem neque cubilia.</p>
-						<ul class="actions">
-							<li><a href="#" class="button">Learn More</a></li>
-						</ul>
+						<h3>Start by launching your Python environment and importing these packages below.</h3>
+						<div style="background:rgb(0, 0, 0)" markdown=1>
+							<p style="color:whitesmoke">
+							&nbspimport pandas as pd</br>
+							&nbspimport numpy as np</p>
+
+						</div></br>
+						<h3>Since we are creating a survey dataset on a hypothetical list of brands, it is imperative we incorporate every
+						respondent's halo effect as shown below as a function.</h3>
+						<div style="background:rgb(0, 0, 0)" markdown=1>
+							<p style="color:whitesmoke">
+							&nbspdef generateHalo(mean = 5, stdev = 5, size = 1000): <i># Generate halo effect for each respondent</i></br>
+							&nbsp&#9rng = np.random.default_rng(2021) <i># Set seed only for this function and not globally</i></br>
+							&nbsp&#9halo = rng.normal(loc = mean, scale = stdev, size = size)</br>
+							&nbsp&#9return halo</p>
+							</div></br>
+						<h3>Next, we create scores (ratings) for each aspect of a brand.</h3>
+						<div style="background:rgb(0, 0, 0)" markdown=1>
+							<p style="color:whitesmoke">
+							&nbspdef generateScores(halo, scoreRange = (0, 10)): <i># Generate scores for 1 column</i></br>
+							&nbsp&#9mean = np.random.uniform(scoreRange[0], scoreRange[1]) <i># Set mean</i></br>
+							&nbsp&#9stdev = np.random.uniform(scoreRange[0], scoreRange[1]) <i># Set standard deviation</i></br>
+							&nbsp&#9scores = np.random.normal(loc = mean, scale = stdev, size = len(halo))</br>
+							&nbsp&#9scores = np.floor(scores + halo) <i># Add halo effect and use floor to get integers</i></br>
+							&nbsp&#9scores = np.clip(scores, scoreRange[0], scoreRange[1]) <i># Limit values to be within range</i></br>
+							&nbsp&#9return scores</p>
+							</div></br>
+						<h3>Then, we create scores (ratings) for all brands.</h3>
+						<div style="background:rgb(0, 0, 0)" markdown=1>
+							<p style="color:whitesmoke">
+							&nbspdef generateBrandSurvey(halo, brands = ['a','b','c','d','e','f','g','h','i','j']): <i># Generate scores for all brands</i></br>
+							&nbsp&#9df = pd.DataFrame()</br>
+							&nbsp&#9for i in brands:</br>
+							&nbsp&#9dfBrand = generateBrandScores(halo, brand = i)</br>
+							&nbsp&#9df = pd.concat([df, dfBrand], axis = 0)</br>
+							&nbsp&#9df = df.reset_index(drop = True)</br>
+							&nbsp&#9return df</p>
+							</div></br>
+						<h3>Finally, we compile these functions and generate the simulated data.</h3>
+						<div style="background:rgb(0, 0, 0)" markdown=1>
+							<p style="color:whitesmoke">
+							&nbspdef main():</br>
+							&nbsp&#9halo = generateHalo()</br>
+							&nbsp&#9df = generateBrandSurvey(halo)</br>
+							&nbsp&#9return df</br>
+						
+							&nbspif __name__ == '__main__':</br>
+							&nbsp&#9df= main()</br>
+							&nbspdf.head()
+						</p>
+							</div></br>
+						<h3>Let's see the output...</h3>
+						<table style="width:100%">
+						<tr>
+							<th>perform</th>
+							<th>leader</th>
+							<th>latest</th>
+							<th>fun</th>
+							<th>serious</th>
+							<th>bargain</th>
+							<th>value</th>
+							<th>trendy</th>
+							<th>rebuy</th>
+							<th>brand</th>
+						</tr>
+						<tr>
+							<td>10.0</td>
+							<td>10.0</td>
+							<td>6.0</td>
+							<td>10.0</td>
+							<td>5.0</td>
+							<td>0.0</td>
+							<td>10.0</td>
+							<td>10.0</td>
+							<td>7.0</td>
+							<td>a</td>
+						</tr>
+						<tr>
+							<td>8.0</td>
+							<td>8.0</td>
+							<td>5.0</td>
+							<td>3.0</td>
+							<td>0.0</td>
+							<td>0.0</td>
+							<td>4.0</td>
+							<td>7.0</td>
+							<td>7.0</td>
+							<td>a</td>
+						</tr>
+						<tr>
+							<td>4.0</td>
+							<td>9.0</td>
+							<td>1.0</td>
+							<td>0.0</td>
+							<td>10.0</td>
+							<td>0.0</td>
+							<td>3.0</td>
+							<td>10.0</td>
+							<td>10.0</td>
+							<td>a</td>
+						</tr>
+						<tr>
+							<td>10.0</td>
+							<td>10.0</td>
+							<td>10.0</td>
+							<td>10.0</td>
+							<td>0.0</td>
+							<td>10.0</td>
+							<td>10.0</td>
+							<td>10.0</td>
+							<td>10.0</td>
+							<td>a</td>
+						</tr>
+						<tr>
+							<td>10.0</td>
+							<td>10.0</td>
+							<td>6.0</td>
+							<td>10.0</td>
+							<td>0.0</td>
+							<td>9.0</td>
+							<td>10.0</td>
+							<td>10.0</td>
+							<td>10.0</td>
+							<td>a</td>
+						</tr>
+						</table>
 					</section>
 
-				<!-- Two -->
-					<section id="two">
-						<h2>Recent Work</h2>
-						<div class="row">
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg" alt="" /></a>
-								<h3>Magna sed consequat tempus</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/02.jpg" class="image fit thumb"><img src="images/thumbs/02.jpg" alt="" /></a>
-								<h3>Ultricies lacinia interdum</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/03.jpg" class="image fit thumb"><img src="images/thumbs/03.jpg" alt="" /></a>
-								<h3>Tortor metus commodo</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/04.jpg" class="image fit thumb"><img src="images/thumbs/04.jpg" alt="" /></a>
-								<h3>Quam neque phasellus</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/05.jpg" class="image fit thumb"><img src="images/thumbs/05.jpg" alt="" /></a>
-								<h3>Nunc enim commodo aliquet</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/06.jpg" class="image fit thumb"><img src="images/thumbs/06.jpg" alt="" /></a>
-								<h3>Risus ornare lacinia</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-						</div>
-						<ul class="actions">
-							<li><a href="#" class="button">Full Portfolio</a></li>
-						</ul>
-					</section>
-
-				<!-- Three -->
-					<section id="three">
-						<h2>Get In Touch</h2>
-						<p>Accumsan pellentesque commodo blandit enim arcu non at amet id arcu magna. Accumsan orci faucibus id eu lorem semper nunc nisi lorem vulputate lorem neque lorem ipsum dolor.</p>
-						<div class="row">
-							<div class="col-8 col-12-small">
-								<form method="post" action="#">
-									<div class="row gtr-uniform gtr-50">
-										<div class="col-6 col-12-xsmall"><input type="text" name="name" id="name" placeholder="Name" /></div>
-										<div class="col-6 col-12-xsmall"><input type="email" name="email" id="email" placeholder="Email" /></div>
-										<div class="col-12"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
-									</div>
-								</form>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</div>
-							<div class="col-4 col-12-small">
-								<ul class="labeled-icons">
-									<li>
-										<h3 class="icon solid fa-home"><span class="label">Address</span></h3>
-										1234 Somewhere Rd.<br />
-										Nashville, TN 00000<br />
-										United States
-									</li>
-									<li>
-										<h3 class="icon solid fa-mobile-alt"><span class="label">Phone</span></h3>
-										000-000-0000
-									</li>
-									<li>
-										<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
-										<a href="#">hello@untitled.tld</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</section>
-
+				
+				
 				<!-- Four -->
 				<!--
 					<section id="four">
